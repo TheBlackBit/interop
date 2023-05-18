@@ -73,7 +73,7 @@ class LoginFragment : Fragment() {
                     LoadingButtonComposable(
                         modifier = Modifier.fillMaxWidth(),
                         title = getString(R.string.login),
-                        isLoading = viewModel.isLoadingState,
+                        isLoading = { viewModel.isLoadingState },
                         onButtonClick = { doLogin() },
                     )
                 }
