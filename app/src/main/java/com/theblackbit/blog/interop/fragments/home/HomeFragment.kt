@@ -1,4 +1,4 @@
-package com.theblackbit.blog.interop.fragments
+package com.theblackbit.blog.interop.fragments.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,7 +20,6 @@ class HomeFragment : Fragment() {
         binding.also {
             it.lifecycleOwner = viewLifecycleOwner
         }
-
         return binding.root
     }
 }

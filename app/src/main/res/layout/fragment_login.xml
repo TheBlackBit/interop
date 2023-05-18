@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.theblackbit.blog.interop.fragments.LoginFragment">
+    tools:context="com.theblackbit.blog.interop.fragments.login.LoginFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -64,9 +64,19 @@
                 app:hintTextColor="?attr/colorOnBackground">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordTextInputEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/buttonComposeView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                tools:layout_height="60dp"
+                tools:background="?attr/colorPrimary"/>
 
         </LinearLayout>
 
