@@ -8,9 +8,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,21 +18,21 @@ fun LoadingButtonComposable(
     modifier: Modifier = Modifier,
     title: String,
     onButtonClick: () -> Unit,
-    isLoading: State<Boolean>,
+    isLoading: () -> Boolean,
 ) {
     Button(
         modifier = modifier,
-        enabled = !isLoading.value,
+        enabled = !isLoading.invoke(),
         colors = ButtonDefaults.buttonColors(
             disabledContainerColor = MaterialTheme.colorScheme.primary,
         ),
         onClick = {
-            if (!isLoading.value) {
+            if (!isLoading.invoke()) {
                 onButtonClick.invoke()
             }
         },
     ) {
-        if (isLoading.value) {
+        if (isLoading.invoke()) {
             CircularProgressIndicator(
                 modifier = Modifier.size(24.dp),
                 color = MaterialTheme.colorScheme.onPrimary,
@@ -49,14 +46,11 @@ fun LoadingButtonComposable(
 @Preview
 @Composable
 fun PrimaryButtonComposablePreview() {
-    val isLoading = remember {
-        mutableStateOf(false)
-    }
     Mdc3Theme {
         LoadingButtonComposable(
             modifier = Modifier.fillMaxWidth(),
             title = "Login",
-            isLoading = isLoading,
+            isLoading = { true },
             onButtonClick = {},
         )
     }

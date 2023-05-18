@@ -1,8 +1,8 @@
 package com.theblackbit.blog.interop.fragments.login
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
 
-    private val _isLoadingState: MutableState<Boolean> = mutableStateOf(false)
-    val isLoadingState: State<Boolean> = _isLoadingState
+    var isLoadingState by mutableStateOf(false)
+        private set
 
     private val _loginStatusStateFlow: MutableStateFlow<LoginStatus> =
         MutableStateFlow(LoginStatus.IDLE)
@@ -21,7 +21,7 @@ class LoginViewModel : ViewModel() {
 
     fun doLogin(userName: String?, password: String?) {
         viewModelScope.launch {
-            _isLoadingState.value = true
+            isLoadingState = true
             _loginStatusStateFlow.value = LoginStatus.IDLE
             delay(2000)
             if (!userName.isNullOrEmpty() && !password.isNullOrEmpty()) {
@@ -29,7 +29,7 @@ class LoginViewModel : ViewModel() {
             } else {
                 _loginStatusStateFlow.value = LoginStatus.ERROR
             }
-            _isLoadingState.value = false
+            isLoadingState = false
         }
     }
 }
