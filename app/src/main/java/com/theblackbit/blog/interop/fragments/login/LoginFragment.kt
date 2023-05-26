@@ -70,10 +70,11 @@ class LoginFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 Mdc3Theme {
+                    val isLoading = viewModel.isLoadingState
                     LoadingButtonComposable(
                         modifier = Modifier.fillMaxWidth(),
                         title = getString(R.string.login),
-                        isLoading = { viewModel.isLoadingState },
+                        isLoading = isLoading,
                         onButtonClick = { doLogin() },
                     )
                 }

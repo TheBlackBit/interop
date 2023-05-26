@@ -18,21 +18,21 @@ fun LoadingButtonComposable(
     modifier: Modifier = Modifier,
     title: String,
     onButtonClick: () -> Unit,
-    isLoading: () -> Boolean,
+    isLoading: Boolean,
 ) {
     Button(
         modifier = modifier,
-        enabled = !isLoading.invoke(),
+        enabled = !isLoading,
         colors = ButtonDefaults.buttonColors(
             disabledContainerColor = MaterialTheme.colorScheme.primary,
         ),
         onClick = {
-            if (!isLoading.invoke()) {
+            if (!isLoading) {
                 onButtonClick.invoke()
             }
         },
     ) {
-        if (isLoading.invoke()) {
+        if (isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.size(24.dp),
                 color = MaterialTheme.colorScheme.onPrimary,
@@ -45,12 +45,12 @@ fun LoadingButtonComposable(
 
 @Preview
 @Composable
-fun PrimaryButtonComposablePreview() {
+fun LoadingButtonComposablePreview() {
     Mdc3Theme {
         LoadingButtonComposable(
             modifier = Modifier.fillMaxWidth(),
             title = "Login",
-            isLoading = { true },
+            isLoading = true,
             onButtonClick = {},
         )
     }
